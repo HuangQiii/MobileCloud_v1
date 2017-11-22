@@ -19,20 +19,20 @@ const Button = ({
   text,
   activeOpacity
 }) => (
-  <TouchableOpacity
-    style={containerStyle}
-    onPress={onPress}
-    disabled={disabled}
-    activeOpacity={activeOpacity}
-  >
-    <Text style={style}>{text}</Text>
-  </TouchableOpacity>
-);
+    <TouchableOpacity
+      style={containerStyle}
+      onPress={onPress}
+      disabled={disabled}
+      activeOpacity={activeOpacity}
+    >
+      <Text style={style}>{text}</Text>
+    </TouchableOpacity>
+  );
 
 Button.propTypes = propTypes;
 
 Button.defaultProps = {
-  onPress() {},
+  onPress() { },
   disabled: false,
   activeOpacity: 0.8
 };

@@ -4,7 +4,6 @@ import Button from '../components/Button';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const aboutLogo = require('../images/about_logo.png');
-
 export default class ThirdPage extends Component {
 
     static navigationOptions = {
@@ -18,7 +17,7 @@ export default class ThirdPage extends Component {
                 backgroundColor="transparent"
                 underlayColor="transparent"
                 activeOpacity={0.8}
-                onPress={() => Linking.openURL('baidu.com')}
+                onPress={() => Linking.openURL('https://www.baidu.com/')}
             />
         )
     };

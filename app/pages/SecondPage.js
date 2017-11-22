@@ -1,9 +1,9 @@
-'use strict';
 import React, { Component } from 'react';
-import { NativeModules } from 'react-native';
 import { Image, ListView, StyleSheet, Text, View, RefreshControl, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
+import Grid from '../components/Grid';
+import LoadingView from '../components/LoadingView';
 
 var DATA = [
     {
@@ -35,18 +35,10 @@ var DATA = [
         name: 'badge',
         iconPath: '../images/badge.png',
         bundleVersionId: 5,
-    },
+    }
 ];
-
 const { width, height } = Dimensions.get('window');
-export default class ThirdPage extends Component {
-
-    static navigationOptions = {
-        title: '首页',
-        tabBarIcon: ({ tintColor }) => (
-            <Icon name="md-home" size={25} color={tintColor} />
-        )
-    };
+export default class SecondPage extends Component {
 
     constructor(props) {
         super(props);
@@ -85,22 +77,17 @@ export default class ThirdPage extends Component {
         setTimeout(() => {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(DATA),
-                loaded: true,
                 isRefreshing: false
             });
         }, 3000);
     }
 
-
     renderLoadingView() {
         return (
-            <View style={styles.containerLoading}>
-                <Text>
-                    Loading...
-                </Text>
-            </View>
+            <LoadingView />
         );
     }
+
     renderSwiper = () => {
         if (this.state.swiperShow) {
             return (
@@ -131,25 +118,22 @@ export default class ThirdPage extends Component {
             return <View style={{ height: 150, }}></View>;
         }
     }
+
     renderIcon(icon) {
         var iconPic = require('../images/ad.png');
         return (
-            <TouchableOpacity
+            <Grid
+                text={icon.name}
+                iconPic={iconPic}
                 activeOpacity={0.2}
                 onPress={() => this.onIconClick(icon.name, icon.id, icon.bundleVersionId)}
-            >
-                <View style={styles.bundleBlock}>
-                    <Image
-                        source={iconPic}
-                        style={styles.bundleIcon}
-                    />
-                    <View>
-                        <Text style={styles.bundleName}>{icon.name}</Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
+                gridStyle={styles.bundleBlock}
+                imageStyle={styles.bundleIcon}
+                textStyle={styles.bundleName}
+            />
         );
     }
+
     render() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
@@ -165,8 +149,8 @@ export default class ThirdPage extends Component {
                             tintColor="grey"
                             title="Loading..."
                             titleColor="grey"
-                            colors={['#eeeeee', '#dddddd', '#ffffff']}
-                            progressBackgroundColor="grey"
+                            colors={['grey', 'grey', 'grey']}
+                            progressBackgroundColor="#F1F1F1"
                         />
                     }
                 >
@@ -204,7 +188,6 @@ var styles = StyleSheet.create({
         width: width,
         flex: 1
     },
-
     listViewBac: {
         backgroundColor: '#FFFFFF',
         borderTopWidth: 1,
@@ -214,12 +197,12 @@ var styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderLeftWidth: 5,
         borderLeftColor: '#3e9ce9',
-        marginTop: 15,
+        marginTop: 15
     },
     listTitle: {
         textAlign: 'left',
         fontSize: 14,
-        margin: 10,
+        margin: 10
     },
     listView: {
         justifyContent: 'flex-start',
@@ -233,16 +216,16 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         borderRightWidth: 1,
         borderBottomWidth: 1,
-        borderColor: '#EEEEEE',
+        borderColor: '#EEEEEE'
     },
     bundleName: {
         textAlign: 'center',
-        fontSize: 12,
-        marginTop: 3,
+        fontSize: 10,
+        marginTop: 10
     },
     bundleIcon: {
-        width: 50,
-        height: 50,
-        borderRadius: 5,
-    },
+        width: 40,
+        height: 40,
+        borderRadius: 5
+    }
 });

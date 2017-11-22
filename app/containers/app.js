@@ -1,27 +1,17 @@
-import React, {
-    Component,
-} from 'react';
-
-import {
-    Text,
-    View,
-    TouchableHighlight,
-} from 'react-native';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
-
-import First from '../pages/FirstPage';
-import Second from '../pages/SecondPage';
-import Third from '../pages/ThirdPage';
-
-import Welcome from '../Welcome';
+import Splash from '../pages/Splash';
+import MainContainer from './MainContainer';
+import FirstPage from '../pages/FirstPage';
+import ThirdPage from '../pages/ThirdPage';
 
 const TabContainer = TabNavigator(
     {
-        Secont: { screen: Second },
-        First: { screen: First },
-        Third: { screen: Third }
+        First: { screen: FirstPage },
+        Second: { screen: MainContainer },
+        Third: { screen: ThirdPage }
     },
     {
+        initialRouteName: 'Second',
         lazy: true,
         tabBarPosition: 'bottom',
         tabBarOptions: {
@@ -43,13 +33,13 @@ const TabContainer = TabNavigator(
 
 const App = StackNavigator(
     {
+        Splash: { screen: Splash },
         Home: {
             screen: TabContainer,
             navigationOptions: {
                 headerLeft: null
             }
-        },
-        Welcome: { screen: Welcome, }
+        }
     },
     {
         headerMode: 'screen',
@@ -88,10 +78,6 @@ App.router.getStateForAction = (action, state) => {
         var i = findDateInArr(state.routes, 'routeName', action.routeName);
         if (i != -1) {
             var routes = state.routes.slice(0, i + 1);
-            console.log('routes:-----');
-            console.log(routes);
-            console.log('action:-----');
-            console.log(action);
         }
         return {
             ...state,
