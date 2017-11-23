@@ -3,6 +3,7 @@ import { Image, ListView, StyleSheet, Text, View, RefreshControl, Dimensions, Sc
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
 import Grid from '../components/Grid';
+import Modal from '../components/Modal';
 import LoadingView from '../components/LoadingView';
 
 var DATA = [
@@ -154,6 +155,7 @@ export default class SecondPage extends Component {
                         />
                     }
                 >
+                    <Modal />
                     <View>
                         {this.renderSwiper()}
                     </View>
