@@ -54,6 +54,7 @@ export default class SecondPage extends Component {
             swiperShow: false,
             loaded: false,
             isRefreshing: false,
+            modalVisible: false
         };
     }
 
@@ -69,7 +70,15 @@ export default class SecondPage extends Component {
     }
 
     onIconClick(name, id, bundleVersionId) {
-        alert('i am clicked')
+        this.setState({
+            modalVisible: true
+        });
+    }
+    onIconClickEnter() {
+        alert('hello');
+        this.setState({
+            modalVisible: false
+        })
     }
     onRefresh() {
         this.setState({
@@ -155,7 +164,13 @@ export default class SecondPage extends Component {
                         />
                     }
                 >
-                    <Modal />
+                    <Modal
+                        show={this.state.modalVisible}
+                        title={'未下载应用，是否安装？'}
+                        content={'未下载应用，是否安装？'}
+                        trueEvent={() => this.onIconClickEnter()}
+                        falseEvent={() => this.setState({ modalVisible: false })}
+                    />
                     <View>
                         {this.renderSwiper()}
                     </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Linking } from 'react-native';
+import { StyleSheet, Text, View, Image, Linking, NetInfo } from 'react-native';
 import Button from '../components/Button';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -21,6 +21,15 @@ export default class ThirdPage extends Component {
             />
         )
     };
+
+    componentDidMount() {
+        if (NetInfo.isConnectionExpensive === true) {
+            alert("1")
+        } else {
+            alert("2")
+        }
+    }
+
 
     render() {
         return (
