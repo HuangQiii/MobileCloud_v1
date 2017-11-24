@@ -22,12 +22,17 @@ export default class ThirdPage extends Component {
         )
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            connectionInfo: null
+        };
+    }
+
     componentDidMount() {
-        if (NetInfo.isConnectionExpensive === true) {
-            alert("1")
-        } else {
-            alert("2")
-        }
+        NetInfo.fetch().done((connectionInfo) => {
+            this.setState({ connectionInfo });
+        });
     }
 
 
@@ -40,6 +45,7 @@ export default class ThirdPage extends Component {
                         <Text style={styles.version}>v1.0.0</Text>
                         <Text style={styles.title}>MobileCloud</Text>
                         <Text style={styles.subtitle}>假装是版权说明</Text>
+                        <Text>当前网络链接类型：{this.state.connectionInfo}</Text>
                     </View>
                     <View style={styles.bottomContainer}>
                         <View style={styles.disclaimerContent}>
