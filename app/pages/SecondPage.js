@@ -38,6 +38,7 @@ var DATA = [
         bundleVersionId: 5,
     }
 ];
+let sign = false;
 const { width, height } = Dimensions.get('window');
 export default class SecondPage extends Component {
 
@@ -48,13 +49,19 @@ export default class SecondPage extends Component {
             data: [],
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => {
-                    return row1 !== row2
+                    if(sign){
+                        return true
+                    }else{
+                        return row1 !== row2
+                    }
+
                 },
             }),
             swiperShow: false,
             loaded: false,
             isRefreshing: false,
-            modalVisible: false
+            modalVisible: false,
+            downloading:false,
         };
     }
 
@@ -71,13 +78,16 @@ export default class SecondPage extends Component {
 
     onIconClick(name, id, bundleVersionId) {
         this.setState({
-            modalVisible: true
+            modalVisible: true,
         });
     }
     onIconClickEnter() {
+        sign = true
         alert('hello');
         this.setState({
-            modalVisible: false
+            modalVisible: false,
+            downloading:true,
+            dataSource: this.state.dataSource.cloneWithRows(this.state.data),
         })
     }
     onRefresh() {
@@ -133,6 +143,7 @@ export default class SecondPage extends Component {
         var iconPic = require('../images/ad.png');
         return (
             <Grid
+                isDownLoading={this.state.downloading}
                 text={icon.name}
                 iconPic={iconPic}
                 activeOpacity={0.2}
