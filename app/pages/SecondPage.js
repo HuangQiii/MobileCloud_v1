@@ -39,6 +39,7 @@ var DATA = [
     }
 ];
 let sign = false;
+let nowBundleName = null;
 const { width, height } = Dimensions.get('window');
 export default class SecondPage extends Component {
 
@@ -49,19 +50,19 @@ export default class SecondPage extends Component {
             data: [],
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => {
-                    if(sign){
+                    if (sign) {
                         return true
-                    }else{
+                    } else {
                         return row1 !== row2
                     }
 
                 },
             }),
+            dataSourceProgress: {},
             swiperShow: false,
             loaded: false,
             isRefreshing: false,
-            modalVisible: false,
-            downloading:false,
+            modalVisible: false
         };
     }
 
@@ -79,15 +80,21 @@ export default class SecondPage extends Component {
     onIconClick(name, id, bundleVersionId) {
         this.setState({
             modalVisible: true,
+
         });
+        nowBundleName = name
     }
     onIconClickEnter() {
         sign = true
-        alert('hello');
+        var obj = {};
+        obj[nowBundleName] = 0.6;
+        var dsp = Object.assign(this.state.dataSourceProgress, obj);
+
         this.setState({
             modalVisible: false,
-            downloading:true,
+            downloading: true,
             dataSource: this.state.dataSource.cloneWithRows(this.state.data),
+            dataSourceProgress: dsp
         })
     }
     onRefresh() {
@@ -141,9 +148,14 @@ export default class SecondPage extends Component {
 
     renderIcon(icon) {
         var iconPic = require('../images/ad.png');
+        var isDownLoading = -1;
+        if (this.state.dataSourceProgress[icon.name] >= 0 && this.state.dataSourceProgress[icon.name] <= 1) {
+            isDownLoading = this.state.dataSourceProgress[icon.name];
+            console.log(isDownLoading)
+        }
         return (
             <Grid
-                isDownLoading={this.state.downloading}
+                progress={isDownLoading}
                 text={icon.name}
                 iconPic={iconPic}
                 activeOpacity={0.2}

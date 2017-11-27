@@ -30,11 +30,21 @@ export default class ThirdPage extends Component {
     }
 
     componentDidMount() {
-        NetInfo.fetch().done((connectionInfo) => {
-            this.setState({ connectionInfo });
+        NetInfo.getConnectionInfo().then((connectionInfo) => {
+            this.setState({
+                connectionInfo: connectionInfo.type
+            });
         });
     }
 
+    checkNetInfo() {
+        NetInfo.getConnectionInfo().then((connectionInfo) => {
+            alert(connectionInfo.type)
+            this.setState({
+                connectionInfo: connectionInfo.type
+            });
+        });
+    }
 
     render() {
         return (
@@ -55,7 +65,7 @@ export default class ThirdPage extends Component {
                             <Button
                                 style={[styles.disclaimer, { color: '#3e9ce9' }]}
                                 text={'QDLW Group'}
-                                onPress={() => Linking.openURL('https://www.baidu.com/')}
+                                onPress={() => this.checkNetInfo()}
                             />
                         </View>
                     </View>

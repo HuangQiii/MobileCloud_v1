@@ -3,7 +3,9 @@ import { Text, View, Image, Dimensions, StyleSheet, Animated } from 'react-nativ
 import NavigationUtil from '../utils/NavigationUtil'
 
 const { height, width } = Dimensions.get('window');
-export default class Splash extends Component {
+const splashImg = require('../images/welcome.jpg');
+
+class Splash extends Component {
     static navigationOptions = {
         header: null
     };
@@ -26,6 +28,10 @@ export default class Splash extends Component {
         }, 1000);
     }
 
+    componentWillUnmount() {
+        clearTimeout(this.timer);
+    }
+
     render() {
         return (
             <View style={{ height: height }}>
@@ -35,7 +41,7 @@ export default class Splash extends Component {
                         height: height * 0.8,
                         transform: [{ scale: this.state.bounceValue }]
                     }}
-                    source={require('../images/welcome.jpg')}
+                    source={splashImg}
                 />
                 <View style={styles.WelcomeBottom}>
                     <Text style={styles.Name}>Mobile Cloud</Text>
@@ -68,3 +74,5 @@ const styles = StyleSheet.create({
         marginTop: 5
     }
 });
+
+export default Splash;
