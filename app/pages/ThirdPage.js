@@ -18,7 +18,7 @@ export default class ThirdPage extends Component {
                 backgroundColor="transparent"
                 underlayColor="transparent"
                 activeOpacity={0.8}
-                onPress={() => Linking.openURL('https://www.baidu.com/')}
+                onPress={() => alert(feedbackText)}
             />
         )
     };
@@ -51,17 +51,16 @@ export default class ThirdPage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.content}>
 
-                    <View style={styles.center}>
-                        <Image style={styles.logo} source={aboutLogo} />
-                        <Text style={styles.title}>数据中心</Text>
-                        <Text style={styles.version}>v1.0.0</Text>
-                        <Text style={styles.subtitle}>QDLW Group</Text>
-                        {/*<Text>当前网络链接类型：{this.state.connectionInfo}</Text>*/}
-                    </View>
+                <View style={styles.center}>
+                    <Image style={styles.logo} source={aboutLogo} />
+                    <Text style={styles.title}>数据中心</Text>
+                    <Text style={styles.version}>v1.0.0</Text>
+                    <Text style={styles.subtitle}>QDLW Group</Text>
+                    {/*<Text>当前网络链接类型：{this.state.connectionInfo}</Text>*/}
+                </View>
 
-                    {/*<View style={styles.bottomContainer}>
+                {/*<View style={styles.bottomContainer}>
                         <View style={styles.disclaimerContent}>
                             <Text style={[styles.disclaimer, { color: '#999999' }]}>
                                 免责声明：
@@ -74,22 +73,21 @@ export default class ThirdPage extends Component {
                         </View>
                     </View>*/}
 
-                    <TextInput
-                        ref={(ref) => {
-                            this.textInput = ref;
-                        }}
-                        style={styles.textInput}
-                        placeholder="如果你有什么想和我们交流，请写下！"
-                        placeholderTextColor="#aaaaaa"
-                        underlineColorAndroid="transparent"
-                        numberOfLines={20}
-                        multiline
-                        //autoFocus
-                        onChangeText={(text) => {
-                            feedbackText = text;
-                        }}
-                    />
-                </View>
+                <TextInput
+                    ref={(ref) => {
+                        this.textInput = ref;
+                    }}
+                    style={styles.textInput}
+                    placeholder="如果你有什么想和我们交流，请写下！"
+                    placeholderTextColor="#aaaaaa"
+                    underlineColorAndroid="transparent"
+                    numberOfLines={20}
+                    multiline
+                    //autoFocus
+                    onChangeText={(text) => {
+                        feedbackText = text;
+                    }}
+                />
             </View>
         );
     }
@@ -124,13 +122,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 28,
         textAlign: 'center',
-        color: '#313131',
+        // color: '#313131',
         marginTop: 10
     },
     subtitle: {
         fontSize: 10,
         textAlign: 'center',
-        color: '#4e4e4e',
+        // color: '#4e4e4e',
         marginTop: 10
     },
     disclaimerContent: {

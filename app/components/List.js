@@ -75,7 +75,7 @@ var style = StyleSheet.create({
         alignItems: 'center'
     },
     listText: {
-        // fontSize: 16,
+        fontSize: 14,
         // color: '#191919'
     },
     listTextSmall: {

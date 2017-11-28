@@ -74,11 +74,11 @@ export default class FirstPage extends Component {
                 />
 
                 <TouchableOpacity>
-                    <View style={{ width: width, backgroundColor: '#FFFFFF', height: 40, marginTop: 30, justifyContent: 'center', alignItems: 'center', }}>
-                        <Text>退出</Text>
+                    <View style={{ width: width, backgroundColor: '#FFFFFF', height: 40, marginTop: 30, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 14 }}>退出</Text>
                     </View>
                 </TouchableOpacity>
-            </View>
+            </View >
         );
     }
 }

@@ -9,31 +9,31 @@ import LoadingView from '../components/LoadingView';
 var DATA = [
     {
         id: 1,
-        name: 'ad',
+        name: '我是天气预报',
         iconPath: '../images/ad.png',
         bundleVersionId: 1,
     },
     {
         id: 2,
-        name: 'anchor',
+        name: '我是财务报表',
         iconPath: '../images/anchor.png',
         bundleVersionId: 2,
     },
     {
         id: 3,
-        name: 'atom',
+        name: '我是数据监控',
         iconPath: '../images/atom.png',
         bundleVersionId: 3,
     },
     {
         id: 4,
-        name: 'backpack',
+        name: '我是流量统计',
         iconPath: '../images/backpack.png',
         bundleVersionId: 4,
     },
     {
         id: 5,
-        name: 'badge',
+        name: '我不知道是啥',
         iconPath: '../images/badge.png',
         bundleVersionId: 5,
     }

@@ -34,7 +34,7 @@ const Grid = ({
                 activeOpacity={activeOpacity}
                 onPress={onPress}
             >
-                <View>
+                <View style={{ alignItems: 'center' }}>
                     <Image
                         source={iconPic}
                         style={imageStyle}
