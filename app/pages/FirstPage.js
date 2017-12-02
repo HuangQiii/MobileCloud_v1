@@ -1,7 +1,5 @@
-import React, {
-    Component,
-} from 'react';
-import { View, Dimensions, StyleSheet, Text, Image, TouchableOpacity, Linking } from 'react-native';
+import React, { Component, } from 'react';
+import { View, Dimensions, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import List from '../components/List';
 
@@ -19,7 +17,7 @@ export default class FirstPage extends Component {
                 backgroundColor="transparent"
                 underlayColor="transparent"
                 activeOpacity={0.8}
-                onPress={() => Linking.openURL('https://www.baidu.com/')}
+                onPress={() => alert("Qyellow")}
             />
         )
     });
@@ -42,7 +40,7 @@ export default class FirstPage extends Component {
                     <View style={styles.userImage}>
                         <Image
                             source={{ uri: 'https://pic4.zhimg.com/v2-292a49c4ca7046333ec6e529c6485dbf_xl.jpg' }}
-                            style={{ width: 80, height: 80, borderRadius: 80 }}
+                            style={[styles.imageStyle, { borderRadius: 80 }]}
                         />
                     </View>
                 </View>
@@ -106,5 +104,9 @@ var styles = StyleSheet.create({
         height: 80,
         alignSelf: 'center',
         marginRight: 30
+    },
+    imageStyle: {
+        width: 80,
+        height: 80
     }
 });

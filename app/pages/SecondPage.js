@@ -39,7 +39,7 @@ var DATA = [
     }
 ];
 let sign = false;
-let nowBundleName = null;
+let dataSourceProgress = {};
 const { width, height } = Dimensions.get('window');
 export default class SecondPage extends Component {
 
@@ -58,44 +58,48 @@ export default class SecondPage extends Component {
 
                 },
             }),
-            dataSourceProgress: {},
             swiperShow: false,
             loaded: false,
             isRefreshing: false,
-            modalVisible: false
         };
     }
 
     componentDidMount() {
-        this.setState({
-            data: DATA,
-            dataSource: this.state.dataSource.cloneWithRows(DATA),
-            loaded: true,
-        });
+        setTimeout(() => {
+            this.setState({
+                data: DATA,
+                dataSource: this.state.dataSource.cloneWithRows(DATA),
+                loaded: true,
+            });
+        }, 2000)
         setTimeout(() => {
             this.setState({ swiperShow: true });
         }, 0)
     }
 
     onIconClick(name, id, bundleVersionId) {
-        this.setState({
-            modalVisible: true,
-
-        });
-        nowBundleName = name
+        this.onIconClickEnter(name, id, bundleVersionId)
     }
-    onIconClickEnter() {
+    onIconClickEnter(name, id, bundleVersionId) {
         sign = true
         var obj = {};
-        obj[nowBundleName] = 0.6;
-        var dsp = Object.assign(this.state.dataSourceProgress, obj);
+        obj[name] = 0.6;
+        var dsp = Object.assign(dataSourceProgress, obj);
 
         this.setState({
-            modalVisible: false,
-            downloading: true,
             dataSource: this.state.dataSource.cloneWithRows(this.state.data),
-            dataSourceProgress: dsp
         })
+        dataSourceProgress = dsp;
+
+        setTimeout(() => {
+            var dsp = Object.assign([], dataSourceProgress);
+            delete dsp[name];
+            dataSourceProgress = Object.assign([], dsp);
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRows(this.state.data),
+            });
+        }, 5000);
+
     }
     onRefresh() {
         this.setState({
@@ -148,14 +152,11 @@ export default class SecondPage extends Component {
 
     renderIcon(icon) {
         var iconPic = require('../images/ad.png');
-        var isDownLoading = -1;
-        if (this.state.dataSourceProgress[icon.name] >= 0 && this.state.dataSourceProgress[icon.name] <= 1) {
-            isDownLoading = this.state.dataSourceProgress[icon.name];
-            console.log(isDownLoading)
-        }
+        var isDownLoading = dataSourceProgress[icon.name] !== undefined ? true : false;
+
         return (
             <Grid
-                progress={isDownLoading}
+                isDownLoading={isDownLoading}
                 text={icon.name}
                 iconPic={iconPic}
                 activeOpacity={0.2}
@@ -171,7 +172,6 @@ export default class SecondPage extends Component {
         if (!this.state.loaded) {
             return this.renderLoadingView();
         }
-        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -187,13 +187,6 @@ export default class SecondPage extends Component {
                         />
                     }
                 >
-                    <Modal
-                        show={this.state.modalVisible}
-                        title={'未下载应用，是否安装？'}
-                        content={'未下载应用，是否安装？'}
-                        trueEvent={() => this.onIconClickEnter()}
-                        falseEvent={() => this.setState({ modalVisible: false })}
-                    />
                     <View>
                         {this.renderSwiper()}
                     </View>

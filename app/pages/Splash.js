@@ -44,7 +44,7 @@ class Splash extends Component {
                     source={splashImg}
                 />
                 <View style={styles.WelcomeBottom}>
-                    <Text style={styles.Name}>Mobile Cloud</Text>
+                    <Text style={styles.Name}>Qyellow</Text>
                     <Text style={styles.Copyright}>©DLQW</Text>
                 </View>
             </View>

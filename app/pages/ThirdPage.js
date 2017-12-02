@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Linking, NetInfo, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import Button from '../components/Button';
 import Icon from 'react-native-vector-icons/Ionicons';
+var dismissKeyboard = require('dismissKeyboard');
 
 let feedbackText;
 const aboutLogo = require('../images/about_logo.png');
 export default class ThirdPage extends Component {
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => ({
         title: '关于',
         tabBarIcon: ({ tintColor }) => (
             <Icon name="md-information-circle" size={25} color={tintColor} />
@@ -18,60 +19,49 @@ export default class ThirdPage extends Component {
                 backgroundColor="transparent"
                 underlayColor="transparent"
                 activeOpacity={0.8}
-                onPress={() => alert(feedbackText)}
+                onPress={() => {
+                    navigation.state.params.handleCheck();
+                }}
             />
         )
-    };
+    });
 
     constructor(props) {
         super(props);
         this.state = {
-            connectionInfo: null
         };
     }
 
     componentDidMount() {
-        NetInfo.getConnectionInfo().then((connectionInfo) => {
-            this.setState({
-                connectionInfo: connectionInfo.type
-            });
-        });
+        feedbackText = '';
+        this.props.navigation.setParams({ handleCheck: this.onActionSelected });
     }
 
-    checkNetInfo() {
-        NetInfo.getConnectionInfo().then((connectionInfo) => {
-            alert(connectionInfo.type)
-            this.setState({
-                connectionInfo: connectionInfo.type
-            });
-        });
-        feedbackText = '';
-    }
+    onActionSelected = () => {
+        if (feedbackText === undefined || feedbackText.replace(/\s+/g, '') === '') {
+            alert('请重新填写');
+        } else {
+            alert('提交成功');
+            this.textInput.clear();
+            dismissKeyboard();
+        }
+    };
+
+    _onTouchStart() {
+        dismissKeyboard();
+    };
 
     render() {
         return (
             <View style={styles.container}>
-
-                <View style={styles.center}>
-                    <Image style={styles.logo} source={aboutLogo} />
-                    <Text style={styles.title}>数据中心</Text>
-                    <Text style={styles.version}>v1.0.0</Text>
-                    <Text style={styles.subtitle}>QDLW Group</Text>
-                    {/*<Text>当前网络链接类型：{this.state.connectionInfo}</Text>*/}
-                </View>
-
-                {/*<View style={styles.bottomContainer}>
-                        <View style={styles.disclaimerContent}>
-                            <Text style={[styles.disclaimer, { color: '#999999' }]}>
-                                免责声明：
-                            </Text>
-                            <Button
-                                style={[styles.disclaimer, { color: '#3e9ce9' }]}
-                                text={'QDLW Group'}
-                                onPress={() => this.checkNetInfo()}
-                            />
-                        </View>
-                    </View>*/}
+                <TouchableWithoutFeedback onPress={() => this._onTouchStart()} style={{ flex: 1 }}>
+                    <View style={styles.center}>
+                        <Image style={styles.logo} source={aboutLogo} />
+                        <Text style={styles.title}>Qyellow</Text>
+                        <Text style={styles.version}>v1.0.0</Text>
+                        <Text style={styles.subtitle}>Qyellow</Text>
+                    </View>
+                </TouchableWithoutFeedback>
 
                 <TextInput
                     ref={(ref) => {
@@ -83,12 +73,13 @@ export default class ThirdPage extends Component {
                     underlineColorAndroid="transparent"
                     numberOfLines={20}
                     multiline
-                    //autoFocus
+                    autoFocus={this.state.autoFocus}
                     onChangeText={(text) => {
                         feedbackText = text;
                     }}
+                    value={this.state.inputText}
                 />
-            </View>
+            </View >
         );
     }
 }
@@ -99,14 +90,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#fff'
     },
-    content: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingBottom: 10
-    },
     center: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     logo: {
         width: 110,
@@ -122,13 +108,11 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 28,
         textAlign: 'center',
-        // color: '#313131',
         marginTop: 10
     },
     subtitle: {
         fontSize: 10,
         textAlign: 'center',
-        // color: '#4e4e4e',
         marginTop: 10
     },
     disclaimerContent: {

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ViewPropTypes, Image, TouchableOpacity, View, Text, Dimensions, ActivityIndicator } from 'react-native';
-import * as Progress from 'react-native-progress';
 
 const propTypes = {
     text: PropTypes.string,
@@ -11,21 +10,21 @@ const propTypes = {
     gridStyle: PropTypes.number,
     imageStyle: PropTypes.number,
     textStyle: PropTypes.number,
-    progress: PropTypes.number
+    isDownLoading: PropTypes.bool
 };
 const { width, height } = Dimensions.get('window')
 const Grid = ({
-  text, iconPic, activeOpacity, onPress, gridStyle, imageStyle, textStyle, progress
+  text, iconPic, activeOpacity, onPress, gridStyle, imageStyle, textStyle, isDownLoading
 }) => (
 
         <View style={gridStyle}>
             {
-                progress !== -1 &&
+                isDownLoading &&
                 <View style={{ position: 'absolute', top: 0, right: 0, width: width / 4, height: 100, justifyContent: 'center', alignItems: 'center', zIndex: 9999, backgroundColor: 'rgba(0,0,0,0.4)' }}>
-                    <Progress.Pie
-                        size={50}
-                        progress={progress}
-                        indeterminate={false}
+                    <ActivityIndicator
+                        animating={isDownLoading}
+                        size="large"
+                        color="#3e9ce9"
                     />
                 </View>
             }
