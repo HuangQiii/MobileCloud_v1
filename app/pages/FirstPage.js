@@ -37,11 +37,12 @@ export default class FirstPage extends Component {
                     <View style={styles.userName}>
                         <Text style={{ fontSize: 28 }}>无</Text>
                     </View>
-                    <View style={styles.userImage}>
-                        <Image
+                    <View style={[styles.userImage, { backgroundColor: '#454B55', borderRadius: 80, alignItems: 'center', justifyContent: 'center' }]}>
+                        {/*<Image
                             source={{ uri: 'https://pic4.zhimg.com/v2-292a49c4ca7046333ec6e529c6485dbf_xl.jpg' }}
                             style={[styles.imageStyle, { borderRadius: 80 }]}
-                        />
+                        />*/}
+                        <Text style={{ fontSize: 28, color: '#FFF' }}>Q</Text>
                     </View>
                 </View>
                 <List

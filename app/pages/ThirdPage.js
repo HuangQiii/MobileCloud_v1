@@ -56,7 +56,10 @@ export default class ThirdPage extends Component {
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={() => this._onTouchStart()} style={{ flex: 1 }}>
                     <View style={styles.center}>
-                        <Image style={styles.logo} source={aboutLogo} />
+                        {/*<Image style={styles.logo} source={aboutLogo} />*/}
+                        <View style={[styles.logo, { backgroundColor: '#454B55', alignItems: 'center', justifyContent: 'center' }]}>
+                            <Text style={{ fontSize: 28, color: '#FFF' }}>Q</Text>
+                        </View>
                         <Text style={styles.title}>Qyellow</Text>
                         <Text style={styles.version}>v1.0.0</Text>
                         <Text style={styles.subtitle}>Qyellow</Text>

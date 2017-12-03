@@ -122,7 +122,7 @@ export default class SecondPage extends Component {
     renderSwiper = () => {
         if (this.state.swiperShow) {
             return (
-                <Swiper height={150}
+                <Swiper height={180}
                     dot={<View style={{ backgroundColor: 'rgba(0,0,0,.2)', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3 }} />}
                     activeDot={<View style={{ backgroundColor: '#FFFFFF', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3 }} />}
                     paginationStyle={{
@@ -134,14 +134,15 @@ export default class SecondPage extends Component {
                     index={0}
                     autoplayTimeout={5}
                 >
-                    <View style={styles.slide} title={<Text numberOfLines={1}>Title for 1</Text>}>
-                        <Image resizeMode='stretch' style={styles.image} source={{ uri: 'http://img1.imgtn.bdimg.com/it/u=1781849339,3078928482&fm=200&gp=0.jpg' }} />
+                    <View style={[styles.slide, { backgroundColor: '#9DD6EB', alignItems: 'center', justifyContent: 'center' }]} title={<Text numberOfLines={1}>Title for 1</Text>}>
+                        {/*<Image resizeMode='stretch' style={styles.image} source={{ uri: 'uri' }} />*/}
+                        <Text style={{ fontSize: 28, color: '#fff' }}>Qyellow</Text>
                     </View>
-                    <View style={styles.slide} title={<Text numberOfLines={1}>Title for 2</Text>}>
-                        <Image resizeMode='stretch' style={styles.image} source={{ uri: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=175680902,1110893123&fm=200&gp=0.jpg' }} />
+                    <View style={[styles.slide, { backgroundColor: '#97CAE5', alignItems: 'center', justifyContent: 'center' }]} title={<Text numberOfLines={1}>Title for 2</Text>}>
+                        <Text style={{ fontSize: 28, color: '#fff' }}>Hello</Text>
                     </View>
-                    <View style={styles.slide} title={<Text numberOfLines={1}>Title for 3</Text>}>
-                        <Image resizeMode='stretch' style={styles.image} source={{ uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1634349987,2562229076&fm=27&gp=0.jpg' }} />
+                    <View style={[styles.slide, { backgroundColor: '#92BBD9', alignItems: 'center', justifyContent: 'center' }]} title={<Text numberOfLines={1}>Title for 3</Text>}>
+                        <Text style={{ fontSize: 28, color: '#fff' }}>React Native</Text>
                     </View>
                 </Swiper>
             );

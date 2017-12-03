@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, Image, Dimensions, StyleSheet, Animated } from 'react-native';
 import NavigationUtil from '../utils/NavigationUtil'
+import SplashScreen from 'react-native-splash-screen'
 
 const { height, width } = Dimensions.get('window');
-const splashImg = require('../images/welcome.jpg');
+const splashImg = require('../images/welcome.png');
 
 class Splash extends Component {
     static navigationOptions = {
@@ -23,6 +24,7 @@ class Splash extends Component {
             toValue: 1.2,
             duration: 1000
         }).start();
+        SplashScreen.hide();
         this.timer = setTimeout(() => {
             NavigationUtil.reset(this.props.navigation, 'Home')
         }, 1000);
